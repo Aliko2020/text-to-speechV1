@@ -1,6 +1,6 @@
 # Text-to-Speech Converter(Serverless)
 
-This project is a serverless application designed to convert text into speech using AWS Polly. The system is built with a React frontend, deployed to Amazon S3, and uses AWS API Gateway to handle HTTP requests. Terraform is used for infrastructure management, making it easy to deploy and manage resources in a repeatable, declarative way.
+This project is a serverless application designed to convert text into speech using AWS Polly. The system is built with a React frontend, deployed to Amazon S3, and uses AWS API Gateway to handle HTTP requests. Terraform is used for infrastructure management, making it easy to deploy and manage resources in a repeatable, declarative way. <br>
 🔗 https://d19y4om6csly31.cloudfront.net/
 
 <img width="1027" height="738" alt="image" src="https://github.com/user-attachments/assets/9bfc7bf3-a70f-4136-93a5-bf4446f3b4f8" />
@@ -47,6 +47,22 @@ Infrastructure as code tool used to define, provision, and manage AWS resources 
 
 
 ## User Flow
+
+User: The user submits text and voice choices via the React frontend.
+
+CloudFront: Routes the request from the frontend to the API Gateway.
+
+API Gateway: Receives the request and sends it to Lambda for processing.
+
+Lambda: Processes the request, calls Polly for speech generation, and stores metadata in DynamoDB.
+
+Polly: Converts the text into speech and returns the audio file.
+
+S3: Lambda stores the generated audio file in S3.
+
+CloudFront: Delivers the audio file to the user by serving it from S3.
+
+User: The user receives and listens to the generated speech.
 
 
 ## Security Implementation
