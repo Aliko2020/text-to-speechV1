@@ -1,7 +1,8 @@
 # Text-to-Speech Converter(Serverless)
 
 This project is a serverless application designed to convert text into speech using AWS Polly. The system is built with a React frontend, deployed to Amazon S3, and uses AWS API Gateway to handle HTTP requests. Terraform is used for infrastructure management, making it easy to deploy and manage resources in a repeatable, declarative way. <br>
-🔗 https://d19y4om6csly31.cloudfront.net/
+Link 🔗 https://d19y4om6csly31.cloudfront.net/ <br>
+Github: 🔗 https://github.com/Aliko2020/text-to-speechV1
 
 <img width="1027" height="738" alt="image" src="https://github.com/user-attachments/assets/9bfc7bf3-a70f-4136-93a5-bf4446f3b4f8" />
 
@@ -167,6 +168,34 @@ curl -X POST "https://35smzwnuoc.execute-api.us-east-1.amazonaws.com/dev/convert
   -H "Content-Type: application/json" \
   -d '{"text": "Hello world, this is a test of the text-to-speech system", "voice": "Joanna"}'
 
+## Challenges Faced 
 
+During the development of the Text-to-Speech Converter system, several challenges were encountered, including CORS issues, cognito URL redirects, and rate limiting. Here's a breakdown of each challenge and how it was addressed: 
 
+1. CORS (Cross-Origin Resource Sharing) Issues 
 
+    Challenge: 
+
+    The frontend, hosted on Amazon S3 and served via CloudFront, made AJAX requests to the API Gateway. This led to CORS errors because the browser was blocking requests from different origins (frontend URL vs API Gateway URL). 
+
+    Solution: 
+
+    API Gateway CORS Configuration: The CORS policy was configured in API Gateway to allow requests from the specific domain where the frontend was hosted. 
+
+    This was done by enabling CORS on API Gateway for all the required methods (GET, POST, etc.), and adding headers such as Access-Control-Allow-Origin to allow the frontend to communicate with the API. 
+
+2. Cognito URL Redirect Issues 
+
+    Challenge: 
+
+    When integrating Amazon Cognito for user authentication, there were issues with URL redirects after login. After successful authentication, Cognito would redirect the user to a specified URL (e.g., the frontend app). Sometimes, the redirect did not work as expected, causing errors or sending users to the wrong URL. 
+
+    Solution: 
+
+    Callback URL Configuration: The callback URL was configured properly in Cognito to ensure that after successful login, users were redirected back to the correct page of the React app. 
+
+    Cognito Hosted UI: Using Cognito's Hosted UI helped simplify the authentication process and allowed proper handling of redirects after login or sign-up. 
+
+    URL Path Management: Managed URL paths within the frontend to correctly handle users coming back from the Cognito authentication page, ensuring they landed on the correct route (e.g., the home page or dashboard). 
+
+ 
